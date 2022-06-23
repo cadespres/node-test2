@@ -23,7 +23,7 @@ const createUser = (req, res) => {
 
     console.log(user);
     user.save()
-        .then(result => {
+        .then(() => {
             res.redirect('/users');
         })
         .catch(err => {
@@ -32,14 +32,20 @@ const createUser = (req, res) => {
         });
 }
 
-const updateUser = (req, res) => {
+async function updateUser(req, res) {
 
     console.log('Received put user request (id and body expected)')
     console.log(req.params);
     console.log(req.body);
 
-    res.json('Ok | PUT');
+    try {
+        const id = '62b476599df5b213345aa781';
+        await User.findByIdAndUpdate(id, req.body);
+    } catch (err) {
+        console.log(err);
+    }
 
+    res.redirect('/users');
 }
 
 module.exports = {
