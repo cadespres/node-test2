@@ -1,20 +1,16 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+module.exports = (sequelize, Sequelize) => {
+    const User = sequelize.define("user", {
+        name: {
+            type: Sequelize.STRING
+        },
+        email: {
+            type: Sequelize.STRING
+        },
+        sex: {
+            type: Sequelize.STRING
+        }
+    });
 
-const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    sex: {
-        type: String,
-        required: true
-    }
-});
+    return User;
+}
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
